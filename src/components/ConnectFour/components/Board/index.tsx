@@ -21,24 +21,24 @@ const reducer = (state: IConnectFourBoardState, action: IConnectFourBoardAction)
   const { type, value } = action;
 
   switch (type) {
-    case ACTION_TYPE.UPDATE_BOARD:
-      return {
-        ...state,
-        board: value,
-      };
-    case ACTION_TYPE.TOGGLE_IS_P1_TURN:
-      return {
-        ...state,
-        isPlayerOneTurn: !state.isPlayerOneTurn,
-      };
-    case ACTION_TYPE.SET_IS_GAME_OVER:
-      return {
-        ...state,
-        isGameOver: true,
-      };
-    case ACTION_TYPE.RESET_BOARD:
-    default:
-      return INITIAL_STATE;
+  case ACTION_TYPE.UPDATE_BOARD:
+    return {
+      ...state,
+      board: value,
+    };
+  case ACTION_TYPE.TOGGLE_IS_P1_TURN:
+    return {
+      ...state,
+      isPlayerOneTurn: !state.isPlayerOneTurn,
+    };
+  case ACTION_TYPE.SET_IS_GAME_OVER:
+    return {
+      ...state,
+      isGameOver: true,
+    };
+  case ACTION_TYPE.RESET_BOARD:
+  default:
+    return INITIAL_STATE;
   }
 };
 
@@ -49,12 +49,12 @@ const Board: React.FC<Props> = () => {
   const getPlayerClassName = useCallback((player: number | null) => {
     const baseClassName = classes.player;
     switch (player) {
-      case CONNECT_FOUR_CONFIG.PLAYERS.P1:
-        return `${baseClassName} ${classes.playerOne}`;
-      case CONNECT_FOUR_CONFIG.PLAYERS.P2:
-        return `${baseClassName} ${classes.playerTwo}`;
-      default:
-        return baseClassName;
+    case CONNECT_FOUR_CONFIG.PLAYERS.P1:
+      return `${baseClassName} ${classes.playerOne}`;
+    case CONNECT_FOUR_CONFIG.PLAYERS.P2:
+      return `${baseClassName} ${classes.playerTwo}`;
+    default:
+      return baseClassName;
     }
   }, []);
 

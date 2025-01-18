@@ -22,36 +22,36 @@ const reducer = <T>(state: IState<T>, action: IAction) => {
   const { history, currentIndex } = state;
 
   switch (type) {
-    case ACTION_TYPE.STATE_UPDATE:
-      return {
-        value,
-        history: [...history, value],
-        currentIndex: currentIndex + 1,
-      };
-    case ACTION_TYPE.STATE_GO_BACK: {
-      const backIndex = currentIndex - 1;
-      if (backIndex < 0) {
-        return state;
-      }
-      return {
-        value: history[backIndex],
-        history,
-        currentIndex: backIndex,
-      };
-    }
-    case ACTION_TYPE.STATE_GO_FORWARD: {
-      const forwardIndex = currentIndex + 1;
-      if (forwardIndex >= history.length) {
-        return state;
-      }
-      return {
-        value: history[forwardIndex],
-        history,
-        currentIndex: forwardIndex,
-      };
-    }
-    default:
+  case ACTION_TYPE.STATE_UPDATE:
+    return {
+      value,
+      history: [...history, value],
+      currentIndex: currentIndex + 1,
+    };
+  case ACTION_TYPE.STATE_GO_BACK: {
+    const backIndex = currentIndex - 1;
+    if (backIndex < 0) {
       return state;
+    }
+    return {
+      value: history[backIndex],
+      history,
+      currentIndex: backIndex,
+    };
+  }
+  case ACTION_TYPE.STATE_GO_FORWARD: {
+    const forwardIndex = currentIndex + 1;
+    if (forwardIndex >= history.length) {
+      return state;
+    }
+    return {
+      value: history[forwardIndex],
+      history,
+      currentIndex: forwardIndex,
+    };
+  }
+  default:
+    return state;
   }
 };
 

@@ -16,14 +16,14 @@ const ToastCreator: React.FC<IToastCreatorProps> = ({ addToast, clearToasts }) =
     let toastMessage = message;
     if (isEmptyString(toastMessage)) {
       switch (type) {
-        case 'success':
-          toastMessage = 'Success!';
-          break;
-        case 'error':
-          toastMessage = 'Error.';
-          break;
-        default:
-          break;
+      case 'success':
+        toastMessage = 'Success!';
+        break;
+      case 'error':
+        toastMessage = 'Error.';
+        break;
+      default:
+        break;
       }
     }
     addToast({

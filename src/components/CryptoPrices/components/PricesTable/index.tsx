@@ -14,24 +14,24 @@ const reducer = (state: ICryptoPricesState, action: ICryptoPricesAction) => {
   const { type, value } = action;
 
   switch (type) {
-    case ACTION_TYPE.UPDATE_PAGE:
-      return {
-        ...state,
-        page: value,
-      };
-    case ACTION_TYPE.UPDATE_DATA:
-      return {
-        ...state,
-        data: value,
-        error: null,
-      };
-    case ACTION_TYPE.UPDATE_ERROR:
-      return {
-        ...state,
-        error: value,
-      };
-    default:
-      return state;
+  case ACTION_TYPE.UPDATE_PAGE:
+    return {
+      ...state,
+      page: value,
+    };
+  case ACTION_TYPE.UPDATE_DATA:
+    return {
+      ...state,
+      data: value,
+      error: null,
+    };
+  case ACTION_TYPE.UPDATE_ERROR:
+    return {
+      ...state,
+      error: value,
+    };
+  default:
+    return state;
   }
 };
 
