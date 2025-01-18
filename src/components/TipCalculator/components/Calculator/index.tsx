@@ -26,23 +26,23 @@ const reducer = (state: IState, action: IAction) => {
   const { type, value } = action;
 
   switch (type) {
-  case ACTION_TYPE.UPDATE_BILL:
-    return {
-      ...state,
-      bill: value,
-    };
-  case ACTION_TYPE.UPDATE_TIP:
-    return {
-      ...state,
-      tip: value,
-    };
-  case ACTION_TYPE.UPDATE_PEOPLE:
-    return {
-      ...state,
-      people: value,
-    };
-  default:
-    return state;
+    case ACTION_TYPE.UPDATE_BILL:
+      return {
+        ...state,
+        bill: value,
+      };
+    case ACTION_TYPE.UPDATE_TIP:
+      return {
+        ...state,
+        tip: value,
+      };
+    case ACTION_TYPE.UPDATE_PEOPLE:
+      return {
+        ...state,
+        people: value,
+      };
+    default:
+      return state;
   }
 };
 

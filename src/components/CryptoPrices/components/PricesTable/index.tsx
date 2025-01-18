@@ -4,7 +4,7 @@ import { CRYPTO_PRICES_CONFIG } from '../../../../constants';
 import { isEmptyList } from '../../../../utils';
 import Button from '../../../UI/Button';
 
-const ACTION_TYPE: {[key in CryptoPricesActionType]: CryptoPricesActionType} = Object.freeze({
+const ACTION_TYPE: { [key in CryptoPricesActionType]: CryptoPricesActionType } = Object.freeze({
   UPDATE_PAGE: 'UPDATE_PAGE',
   UPDATE_DATA: 'UPDATE_DATA',
   UPDATE_ERROR: 'UPDATE_ERROR',
@@ -14,24 +14,24 @@ const reducer = (state: ICryptoPricesState, action: ICryptoPricesAction) => {
   const { type, value } = action;
 
   switch (type) {
-  case ACTION_TYPE.UPDATE_PAGE:
-    return {
-      ...state,
-      page: value,
-    };
-  case ACTION_TYPE.UPDATE_DATA:
-    return {
-      ...state,
-      data: value,
-      error: null,
-    };
-  case ACTION_TYPE.UPDATE_ERROR:
-    return {
-      ...state,
-      error: value,
-    };
-  default:
-    return state;
+    case ACTION_TYPE.UPDATE_PAGE:
+      return {
+        ...state,
+        page: value,
+      };
+    case ACTION_TYPE.UPDATE_DATA:
+      return {
+        ...state,
+        data: value,
+        error: null,
+      };
+    case ACTION_TYPE.UPDATE_ERROR:
+      return {
+        ...state,
+        error: value,
+      };
+    default:
+      return state;
   }
 };
 

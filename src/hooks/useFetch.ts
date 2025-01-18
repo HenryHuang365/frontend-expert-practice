@@ -15,24 +15,24 @@ const reducer = (state: IUseFetchState, action: IAction) => {
   const { type, value } = action;
 
   switch (type) {
-  case 'setResponseJSON':
-    return {
-      ...state,
-      responseJSON: value,
-      error: null,
-    };
-  case 'setIsLoading':
-    return {
-      ...state,
-      isLoading: value,
-    };
-  case 'setError':
-    return {
-      ...state,
-      error: value,
-    };
-  default:
-    return state;
+    case 'setResponseJSON':
+      return {
+        ...state,
+        responseJSON: value,
+        error: null,
+      };
+    case 'setIsLoading':
+      return {
+        ...state,
+        isLoading: value,
+      };
+    case 'setError':
+      return {
+        ...state,
+        error: value,
+      };
+    default:
+      return state;
   }
 };
 

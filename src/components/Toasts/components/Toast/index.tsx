@@ -8,12 +8,12 @@ import { CONTENT_VARIANTS } from '../../../../constants';
 const Toast: React.FC<IToastProps> = ({ toast, onRemove }) => {
   const toastTypeClass = useMemo(() => {
     switch (toast.state) {
-    case 'success':
-      return classes.toastSuccess;
-    case 'error':
-      return classes.toastError;
-    default:
-      return '';
+      case 'success':
+        return classes.toastSuccess;
+      case 'error':
+        return classes.toastError;
+      default:
+        return '';
     }
   }, [toast.state]);
 

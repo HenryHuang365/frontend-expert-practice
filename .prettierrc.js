@@ -1,7 +1,7 @@
 module.exports = {
   arrowParens: 'always',
   bracketSameLine: false,
-  bracketSpacing: false,
+  bracketSpacing: true, // Enable spaces inside curly braces
   singleQuote: true,
   trailingComma: 'all',
   tabWidth: 2,

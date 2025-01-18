@@ -24,28 +24,28 @@ const reducer = (state: IMemoryBoardState, action: IMemoryBoardAction) => {
   const { value, type } = action;
 
   switch (type) {
-  case ACTION_TYPE.UPDATE_BOARD:
-    return {
-      ...state,
-      board: value,
-    };
-  case ACTION_TYPE.UPDATE_VALID_MOVES_COUNT:
-    return {
-      ...state,
-      validMovesCount: value,
-    };
-  case ACTION_TYPE.UPDATE_MOVES:
-    return {
-      ...state,
-      moves: value,
-    };
-  case ACTION_TYPE.RESET_GAME:
-    return {
-      ...INITIAL_STATE,
-      board: shuffleArray([...MEMORY_CONFIG.TILES, ...MEMORY_CONFIG.TILES]),
-    };
-  default:
-    return state;
+    case ACTION_TYPE.UPDATE_BOARD:
+      return {
+        ...state,
+        board: value,
+      };
+    case ACTION_TYPE.UPDATE_VALID_MOVES_COUNT:
+      return {
+        ...state,
+        validMovesCount: value,
+      };
+    case ACTION_TYPE.UPDATE_MOVES:
+      return {
+        ...state,
+        moves: value,
+      };
+    case ACTION_TYPE.RESET_GAME:
+      return {
+        ...INITIAL_STATE,
+        board: shuffleArray([...MEMORY_CONFIG.TILES, ...MEMORY_CONFIG.TILES]),
+      };
+    default:
+      return state;
   }
 };
 
@@ -57,16 +57,16 @@ const Board: React.FC<Props> = () => {
       const baseClassName = classes.tile;
       if (state.moves[tile].includes(index)) {
         switch (tile) {
-        case MEMORY_CONFIG.TILES_MAP.red:
-          return `${baseClassName} ${classes.tileRed}`;
-        case MEMORY_CONFIG.TILES_MAP.green:
-          return `${baseClassName} ${classes.tileGreen}`;
-        case MEMORY_CONFIG.TILES_MAP.blue:
-          return `${baseClassName} ${classes.tileBlue}`;
-        case MEMORY_CONFIG.TILES_MAP.yellow:
-          return `${baseClassName} ${classes.tileYellow}`;
-        default:
-          return baseClassName;
+          case MEMORY_CONFIG.TILES_MAP.red:
+            return `${baseClassName} ${classes.tileRed}`;
+          case MEMORY_CONFIG.TILES_MAP.green:
+            return `${baseClassName} ${classes.tileGreen}`;
+          case MEMORY_CONFIG.TILES_MAP.blue:
+            return `${baseClassName} ${classes.tileBlue}`;
+          case MEMORY_CONFIG.TILES_MAP.yellow:
+            return `${baseClassName} ${classes.tileYellow}`;
+          default:
+            return baseClassName;
         }
       }
       return baseClassName;

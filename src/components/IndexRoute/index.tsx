@@ -27,7 +27,10 @@ const IndexRoute: React.FC<Props> = () => {
   return (
     <motion.section variants={containerVariants} initial='hidden' animate='visible' className={classes.container}>
       <motion.h1 variants={CONTENT_VARIANTS} className={classes.title}>
-        Hey there! <motion.span className={classes.hand} variants={handVariants}>👋🏼</motion.span>
+        Hey there!{' '}
+        <motion.span className={classes.hand} variants={handVariants}>
+          👋🏼
+        </motion.span>
       </motion.h1>
       <motion.p variants={CONTENT_VARIANTS}>
         The FrontendExpert course takes you through the essential technologies and concepts of the frontend ecosystem. The course can be purchased

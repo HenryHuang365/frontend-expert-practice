@@ -7,7 +7,7 @@ module.exports = {
       jsx: true,
     },
     sourceType: 'module',
-    babelOptions: {presets: ['@babel/preset-react', '@babel/preset-typescript']},
+    babelOptions: { presets: ['@babel/preset-react', '@babel/preset-typescript'] },
     project: './tsconfig.json',
   },
   env: {
@@ -31,7 +31,7 @@ module.exports = {
     'no-console': 1,
     'no-await-in-loop': 1,
     'no-return-assign': ['error', 'except-parens'],
-    'no-unused-expressions': [2, {allowTaggedTemplates: true}],
+    'no-unused-expressions': [2, { allowTaggedTemplates: true }],
     'import/prefer-default-export': 0,
     import: 0,
     'react/require-default-props': 0,
@@ -58,7 +58,7 @@ module.exports = {
     ],
     camelcase: 1,
     'template-curly-spacing': 'off',
-    indent: ['error', 2, {ignoredNodes: ['TemplateLiteral']}],
+    indent: ['error', 2, { ignoredNodes: ['TemplateLiteral'] }],
     'max-len': [
       1,
       {
@@ -87,7 +87,7 @@ module.exports = {
       version: 'detect',
       flowVersion: '0.53',
     },
-    propWrapperFunctions: ['forbidExtraProps', {property: 'freeze', object: 'Object'}, {property: 'myFavoriteWrapper'}],
-    linkComponents: ['Hyperlink', {name: 'Link', linkAttribute: 'to'}],
+    propWrapperFunctions: ['forbidExtraProps', { property: 'freeze', object: 'Object' }, { property: 'myFavoriteWrapper' }],
+    linkComponents: ['Hyperlink', { name: 'Link', linkAttribute: 'to' }],
   },
 };
