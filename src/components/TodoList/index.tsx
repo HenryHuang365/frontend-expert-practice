@@ -1,4 +1,4 @@
-import React, { useCallback, useState, type ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import classes from './styles.module.scss';
 import ProjectPage from '../ProjectPage';
@@ -7,104 +7,28 @@ import CodeBlock from '../UI/CodeBlock';
 import { sampleTodoItem } from './codeBlocks';
 import Input from '../UI/Input';
 import { ButtonBlue } from '../UI/Button';
-import IconButton from '../UI/IconButton';
-import Trash from '../Icons/Trash';
-import { isEmptyString } from '../../utils';
 import Divider from '../UI/Divider';
 import { CONTENT_VARIANTS } from '../../constants';
 
-const todoVariants = {
-  hidden: {
-    opacity: 0,
-    y: -10,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-};
-
-interface Todo {
+interface ToDo {
   text: string;
-  isSelected: boolean;
 }
-
-interface TodoItemProps extends Todo {
-  onClick: () => void;
-  onDelete: () => void;
-}
-
-const TodoItem: React.FC<TodoItemProps> = (props) => {
-  const { text, isSelected, onClick, onDelete } = props;
-
-  const handleDeleteClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
-      onDelete();
-    },
-    [onDelete],
-  );
-
-  return (
-    <motion.div variants={todoVariants} className={classes.todoItem} onClick={onClick}>
-      <p className={`${classes.todoItemText} ${isSelected ? classes.todoItemSelected : ''}`}>{text}</p>
-      <IconButton onClick={handleDeleteClick} className={classes.deleteButton}>
-        <Trash />
-      </IconButton>
-    </motion.div>
-  );
-};
 
 const TodoList: React.FC<Props> = ({ title }) => {
-  const [todoText, setTodoText] = useState('');
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [input, setInput] = useState<string>('');
+  const [toDoLists, setToDoLists] = useState<ToDo[]>([]);
+  const handleSubmit = () => {
+    const todoItem: ToDo = { text: input ?? '' };
+    const array = [...toDoLists, todoItem];
+    setToDoLists(array);
+    setInput('');
+  };
 
-  const handleTextChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const text = e.currentTarget.value;
-    setTodoText(text);
-  }, []);
-
-  const handleTodoItemClick = useCallback((index: number) => {
-    setTodos((prevTodos) => {
-      const prevTodosClone = [...prevTodos];
-      const selectedTodo = { ...prevTodosClone[index] };
-      selectedTodo.isSelected = !selectedTodo.isSelected;
-      prevTodosClone[index] = selectedTodo;
-      return prevTodosClone;
-    });
-  }, []);
-
-  const handleTodoItemDelete = useCallback((index: number) => {
-    setTodos((prevTodos) => {
-      const prevTodosClone = [...prevTodos];
-      prevTodosClone.splice(index, 1);
-      return prevTodosClone;
-    });
-  }, []);
-
-  const handleAddTodo = useCallback((text: string) => {
-    if (isEmptyString(text)) {
-      return;
-    }
-    setTodos((prevTodos) => [
-      {
-        text,
-        isSelected: false,
-      },
-      ...prevTodos,
-    ]);
-    setTodoText('');
-  }, []);
-
-  const handlePressEnter = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>, text: string) => {
-      if (e?.key === 'Enter') {
-        handleAddTodo(text);
-      }
-    },
-    [handleAddTodo],
-  );
-
+  const handleDelete = (index: number) => {
+    const prev = [...toDoLists];
+    prev.splice(index, 1);
+    setToDoLists(prev);
+  };
   return (
     <ProjectPage title={title}>
       <QuestionDetails
@@ -147,40 +71,107 @@ const TodoList: React.FC<Props> = ({ title }) => {
           <h1 className={classes.todoListHeader}>Todo List</h1>
           <div className={classes.todoListInputWrapper}>
             <Input
-              autoFocus
-              id='todo'
+              key={'input'}
               type='text'
-              placeholder='Add a todo...'
-              value={todoText}
-              onChange={handleTextChange}
-              onKeyDown={(e) => {
-                handlePressEnter(e, todoText);
+              placeholder='Input'
+              value={input}
+              onChange={(e) => {
+                setInput(e.currentTarget.value);
               }}
             />
             <ButtonBlue
+              key={'add-button'}
+              disabled={input === ''}
               onClick={() => {
-                handleAddTodo(todoText);
+                handleSubmit();
               }}
-              className={classes.addButton}
             >
               Add
             </ButtonBlue>
           </div>
-          <div className={classes.todosWrapper}>
-            {todos.map((todo, index) => (
-              <TodoItem
-                key={`todo-${index}`}
-                text={todo.text}
-                isSelected={todo.isSelected}
-                onClick={() => {
-                  handleTodoItemClick(index);
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginBottom: '10px',
+              gap: '1rem',
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: 'transparent',
+                borderRadius: '5px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '40px',
+                width: '100%',
+                border: 'white solid 1px',
+                padding: '0 10px',
+              }}
+            >
+              <input
+                type='text'
+                placeholder='Second input'
+                style={{
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  width: '100%',
+                  height: '100%',
+                  color: 'white',
+                  fontSize: 'large',
                 }}
-                onDelete={() => {
-                  handleTodoItemDelete(index);
+                value={input}
+                onChange={(e) => {
+                  setInput(e.currentTarget.value);
                 }}
               />
-            ))}
+            </div>
+            <ButtonBlue
+              disabled={input === ''}
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
+              Add
+            </ButtonBlue>
           </div>
+          <ul
+            key='todo-list'
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              textAlign: 'left',
+              paddingLeft: '0px',
+            }}
+          >
+            {toDoLists.map((t, index) => (
+              <li
+                key={`t.text-${index}`}
+                style={{
+                  backgroundColor: 'white',
+                  color: 'black',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '5px 10px',
+                  borderRadius: '5px',
+                }}
+              >
+                <p style={{ alignItems: 'center' }}>{t.text}</p>
+                <ButtonBlue
+                  onClick={() => {
+                    handleDelete(index);
+                  }}
+                >
+                  X
+                </ButtonBlue>
+              </li>
+            ))}
+          </ul>
         </div>
       </motion.section>
     </ProjectPage>
